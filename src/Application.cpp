@@ -3,13 +3,14 @@
 #include "Header.hpp"
 
 #include "State.hpp"
+#include "Renderer.hpp"
 
 namespace Tolik
 {
 Application::Application()
 {
   m_window.Init(&m_running);
-  m_state = new GameState([this](State *newState) { ChangeState(newState); }, m_debug);
+  m_state = new GameState({m_debug, this, new Renderer()});
 }
 
 void Application::Run()

@@ -11,7 +11,7 @@ class Debug;
 class GameState : public State
 {
 public:
-  GameState(StateDeps newDeps) { deps = newDeps; }
+  GameState(StateDeps *newDeps) { deps = newDeps; }
 
   virtual void Update() override;
 

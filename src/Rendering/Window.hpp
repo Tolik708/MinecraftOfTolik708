@@ -4,15 +4,17 @@
 namespace Tolik
 {
 class SDL_Window;
+class Debug;
 
 class Window
 {
 public:
-  Window(bool *running);
+  void Init(bool *running, Debug *debug);
 
 private:
   bool *m_running;
   SDL_Window *m_window;
+  Debug *m_debug;
 }
 }
 

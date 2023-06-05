@@ -5,11 +5,12 @@ namespace Tolik
 {
 class Debug;
 class Renderer;
+class Context;
 
 struct StateDeps
 {
   Debug *debug;
-  std::function<void(State*)> ChangeState;
+  Context *context;
   Renderer *renderer;
 };
 
