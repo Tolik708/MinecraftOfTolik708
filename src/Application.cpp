@@ -2,11 +2,13 @@
 
 #include "Header.hpp"
 
+#include "RenderAPIOpenGL.hpp"
+
 namespace Tolik
 {
 void Application::Init()
 {
-  SDL_CALL(&m_debug, SDL_Init(SDL_INIT_EVERYTHING));
+  SDL_CALL((&m_debug), SDL_Init(SDL_INIT_EVERYTHING) == 0);
 }
 
 void Application::Run()

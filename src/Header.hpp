@@ -3,7 +3,6 @@
 
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
-#include <glm.hpp>
 
 #include <math.h>
 #include <stdint.h>
