@@ -2,13 +2,14 @@
 
 #include "Header.hpp"
 
-#include "RenderAPIOpenGL.hpp"
+#include "State.hpp"
 
 namespace Tolik
 {
-void Application::Init()
+Application::Application()
 {
-  SDL_CALL((&m_debug), SDL_Init(SDL_INIT_EVERYTHING) == 0);
+  m_window.Init(&m_running);
+  m_state = new GameState([this](State *newState) { ChangeState(newState); }, m_debug);
 }
 
 void Application::Run()
@@ -16,13 +17,14 @@ void Application::Run()
   m_running = true;
   while(m_running)
   {
-    
+    m_satate.Update();
   }
   Quit();
 }
 
 void Application::Quit()
 {
-  
+  m_state.Quit();
+  m_window.Quit();
 }
 }

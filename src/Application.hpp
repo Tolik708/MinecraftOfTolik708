@@ -2,24 +2,26 @@
 #define APPLICATION_HPP
 
 #include "Debug.hpp"
+#include "Window.hpp"
 
 namespace Tolik
 {
-class Event;
+class State;
 
 class Application
 {
-  friend class EventHandler;
 public:
-  Application() { Init(); }
-  void Init();
+  Application();
   void Run();
-  void Quit();
 
 private:
+  void Quit();
+  inline void ChangeState(State *newState) { delete m_state; m_state = newState; }
+
   bool m_running = false;
+  State *m_state;
   Debug m_debug;
-  
+  Window m_window;
 };
 }
 
