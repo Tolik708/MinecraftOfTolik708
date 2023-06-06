@@ -5,18 +5,20 @@ namespace Tolik
 {
 class Debug;
 class Renderer;
-class Context;
+class Game;
 
 struct StateDeps
 {
+  StateDeps(Debug *newDebug, Game *newGame, Renderer *newRenderer) : debug(newDebug), game(newGame), renderer(newRenderer) {}
   Debug *debug;
-  Context *context;
+  Game *game;
   Renderer *renderer;
 };
 
 class State
 {
 public:
+  virtual ~State() = default;
   virtual void Update() = 0;
 };
 }

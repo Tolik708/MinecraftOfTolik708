@@ -2,12 +2,15 @@
 #define APPLICATION_HPP
 
 #include "Debug.hpp"
+#include "RenderAPI.hpp"
+#include "RenderAPIOpenGL.hpp"
 #include "Window.hpp"
+#include "Renderer.hpp"
+#include "Game.hpp"
+
 
 namespace Tolik
 {
-class State;
-
 class Application
 {
 public:
@@ -15,13 +18,12 @@ public:
   void Run();
 
 private:
-  void Quit();
-  inline void ChangeState(State *newState) { delete m_state; m_state = newState; }
-
   bool m_running = false;
-  State *m_state;
   Debug m_debug;
+  RenderAPI *m_api; // Window class owns it. Do not delete it here!!!
   Window m_window;
+  Renderer m_renderer;
+  Game m_game;
 };
 }
 

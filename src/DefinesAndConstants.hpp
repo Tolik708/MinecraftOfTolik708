@@ -3,7 +3,4 @@
 
 #define BIT(x) (1 << x)
 
-class RenderAPI;
-extern const RenderAPI *renderAPI;
-
 #endif

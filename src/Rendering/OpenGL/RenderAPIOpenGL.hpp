@@ -10,14 +10,13 @@ namespace Tolik
 class RenderAPIOpenGL : public RenderAPI
 {
 public:
-  RenderAPIOpenGL(Debug *newDebug);
-
+  virtual void Init(Debug *debug) override;
   virtual uint32_t GetSDLWindowFlags() override;
   virtual void Load() override;
   virtual void Clear() override;
-  virtual void CreateContext(void *context, SDL_Window *window) override;
+  virtual void CreateContext(void *context, void *data) override;
   virtual void DestroyContext(void *context) override;
-  virtual void SwapBuffers(void *window) override;
+  virtual void SwapBuffers(void *data) override;
   virtual void Viewport(int x, int y, uint32_t width, uint32_t height) override;
 
 private:

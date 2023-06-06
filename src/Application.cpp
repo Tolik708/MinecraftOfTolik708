@@ -3,14 +3,21 @@
 #include "Header.hpp"
 
 #include "State.hpp"
+#include "RenderAPI.hpp"
+#include "RenderAPIOpenGL.hpp"
+#include "Window.hpp"
 #include "Renderer.hpp"
+#include "Game.hpp"
 
 namespace Tolik
 {
 Application::Application()
 {
-  m_window.Init(&m_running);
-  m_state = new GameState({m_debug, this, new Renderer()});
+  m_api = new RenderAPIOpenGL(); // Here we decide what RenderAPI we will use
+  m_api->Init(&m_debug);
+  m_window.Init(&m_running, &m_debug, m_api); //From now it will own RenderAPI
+  m_renderer.Init(m_api, &m_debug, &m_window);
+  m_game.Init(new StateDeps(&m_debug, &m_game, &m_renderer));
 }
 
 void Application::Run()
@@ -18,14 +25,10 @@ void Application::Run()
   m_running = true;
   while(m_running)
   {
-    m_satate.Update();
+    m_renderer.StartFrame();
+    m_window.ListenToEvents();
+    m_game.Update();
+    m_renderer.EndFrame();
   }
-  Quit();
-}
-
-void Application::Quit()
-{
-  m_state.Quit();
-  m_window.Quit();
 }
 }
