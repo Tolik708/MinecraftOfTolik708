@@ -2,20 +2,20 @@
 
 namespace Tolik
 {
-Ray::Ray(const vec3 &origin, const vec3 &direction)
+Ray::Ray(const Vec3 &origin, const Vec3 &direction)
 {
   this->origin = origin;
   this->direction = direction;
 }
 
-void Ray::SetDirection(const vec3 &direction)
+void Ray::SetDirection(const Vec3 &direction)
 {
   if (direction.SqrMagnitude() != 1)
     this->direction = direction.Normalized();
   else
     this->direction = direction;
 }
-void Ray::SetOrigin(const vec3 &origin)
+void Ray::SetOrigin(const Vec3 &origin)
 {
   this->origin = origin;
 }

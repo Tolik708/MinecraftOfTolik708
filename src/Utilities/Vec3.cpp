@@ -2,19 +2,19 @@
 
 namespace Tolik
 {
-vec3 vec3::Normalized() const 
+Vec3 Vec3::Normalized() const 
 {
   float inverseMagnitude = 1 / Magnitude();
-  return vec3(x * inverseMagnitude, y * inverseMagnitude, z * inverseMagnitude);
+  return Vec3(x * inverseMagnitude, y * inverseMagnitude, z * inverseMagnitude);
 }
-void vec3::Normalize()
+void Vec3::Normalize()
 {
   float inverseMagnitude = 1 / Magnitude();
   x *= inverseMagnitude;
   y *= inverseMagnitude;
   z *= inverseMagnitude;
 }
-void vec3::ClampMagnitude(float maxMagnitude, float minMagnitude)
+void Vec3::ClampMagnitude(float maxMagnitude, float minMagnitude)
 {
   float sqrMagnitude = SqrMagnitude();
   if (sqrMagnitude > maxMagnitude * maxMagnitude)
@@ -33,7 +33,7 @@ void vec3::ClampMagnitude(float maxMagnitude, float minMagnitude)
   }
 }
 
-vec3 vec3::ClampMagnitude(const vec3 &vector, float maxMagnitude, float minMagnitude)
+Vec3 Vec3::ClampMagnitude(const Vec3 &vector, float maxMagnitude, float minMagnitude)
 {
   float sqrMagnitude = vector.SqrMagnitude();
   if (sqrMagnitude > maxMagnitude * maxMagnitude)
@@ -43,12 +43,12 @@ vec3 vec3::ClampMagnitude(const vec3 &vector, float maxMagnitude, float minMagni
   return vector;
 }
 
-const vec3 vec3::right = vec3(1, 0, 0);
-const vec3 vec3::left = vec3(-1, 0, 0);
-const vec3 vec3::up = vec3(0, 1, 0);
-const vec3 vec3::down = vec3(0, -1, 0);
-const vec3 vec3::forward = vec3(0, 0, 1);
-const vec3 vec3::backward = vec3(0, 0, -1);
-const vec3 vec3::one = vec3(1, 1, 1);
-const vec3 vec3::zero = vec3();
+const Vec3 Vec3::right = Vec3(1, 0, 0);
+const Vec3 Vec3::left = Vec3(-1, 0, 0);
+const Vec3 Vec3::up = Vec3(0, 1, 0);
+const Vec3 Vec3::down = Vec3(0, -1, 0);
+const Vec3 Vec3::forward = Vec3(0, 0, 1);
+const Vec3 Vec3::backward = Vec3(0, 0, -1);
+const Vec3 Vec3::one = Vec3(1, 1, 1);
+const Vec3 Vec3::zero = Vec3();
 }

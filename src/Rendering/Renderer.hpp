@@ -15,7 +15,9 @@ public:
   const RenderAPI &GetAPI() { return  *m_api; } 
 
   void StartFrame();
+  void Render(void *model);
   void EndFrame();
+
 private:
   RenderAPI *m_api;
   Debug *m_debug;

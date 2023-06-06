@@ -1,23 +1,23 @@
 #ifndef RAY
 #define RAY
 
-#include "vec3.hpp"
+#include "Vec3.hpp"
 
 namespace Tolik
 {
 class Ray
 {
 private:
-  vec3 origin;
-  vec3 direction;
+  Vec3 origin;
+  Vec3 direction;
 public:
-  Ray(const vec3 &origin, const vec3 &direction);
+  Ray(const Vec3 &origin, const Vec3 &direction);
 
-  inline void SetOrigin(const vec3 &origin);
-  inline void SetDirection(const vec3 &direction);
-  inline vec3 GetOrigin() const { return origin; }
-  inline vec3 GetDirection() const { return direction; }
-  inline vec3 Calculate(float t) const { return origin + (direction * t); }
+  inline void SetOrigin(const Vec3 &origin);
+  inline void SetDirection(const Vec3 &direction);
+  inline Vec3 GetOrigin() const { return origin; }
+  inline Vec3 GetDirection() const { return direction; }
+  inline Vec3 Calculate(float t) const { return origin + (direction * t); }
 };
 }
 

@@ -25,6 +25,11 @@ void Renderer::StartFrame()
   m_api->Clear();
 }
 
+void Renderer::Render()
+{
+  
+}
+
 void Renderer::EndFrame()
 {
   m_api->SwapBuffers(m_window->GetWindow());

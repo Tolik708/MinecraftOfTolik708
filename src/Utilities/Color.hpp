@@ -35,13 +35,13 @@ struct Color32
   inline uint8_t& operator[](int i) { return padding[i]; }
 
   inline uint32_t toUint32() const { return reinterpret_cast<uint32_t>(padding); }
-  inline vec3 toUnitColor32() const { return vec3(r * DIV255, g * DIV255, b * DIV255); }
+  inline Vec3 toUnitColor32() const { return Vec3(r * DIV255, g * DIV255, b * DIV255); }
 
   inline static uint32_t toUint32(const Color32 &color) { return reinterpret_cast<uint32_t>(color.padding); }
-  inline static vec3 toUnitColor32(const Color32 &color) { return vec3(color[0] * DIV255, color[1] * DIV255, color[2] * DIV255); }
+  inline static Vec3 toUnitColor32(const Color32 &color) { return Vec3(color[0] * DIV255, color[1] * DIV255, color[2] * DIV255); }
   inline static Color32 unitToColor32(float r, float g, float b, float a) { return Color32(255 * r, 255 * g, 255 * b, 255 * a); }
   inline static Color32 unitToColor32(float r, float g, float b) { return Color32(255 * r, 255 * g, 255 * b); }
-  inline static Color32 unitToColor32(const vec3 &vector) { return Color32(255 * vector.x, 255 * vector.y, 255 * vector.z); }
+  inline static Color32 unitToColor32(const Vec3 &vector) { return Color32(255 * vector.x, 255 * vector.y, 255 * vector.z); }
   inline static Color32 Lerp(const Color32 &a, const Color32 &b, float t) { return a * (1 - t) + (b * t); }
 };
 

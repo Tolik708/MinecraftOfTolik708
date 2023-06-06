@@ -32,7 +32,7 @@ void RenderAPIOpenGL::SetAttributes()
 
 void RenderAPIOpenGL::Clear()
 {
-  GL_CALL(m_debug, glClearColor(0, 1, 0, 1));
+  GL_CALL(m_debug, glClearColor(0.2, 0.2, 0.2, 1));
   GL_CALL(m_debug, glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }
 void RenderAPIOpenGL::CreateContext(void *context, void *data)
