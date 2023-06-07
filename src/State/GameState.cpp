@@ -2,6 +2,8 @@
 
 #include "Header.hpp"
 
+#include "Renderer.hpp"
+
 namespace Tolik
 {
 GameState::GameState(StateDeps *newDeps)
@@ -12,11 +14,15 @@ GameState::GameState(StateDeps *newDeps)
 void GameState::Init()
 {
   SDL_SetEventFilter(&EventFilter, nullptr);
+
+  std::vector<Vertex> verts = { { 0, 0, 0 },   { 0, 0.5, 0 },   { 0.5, 0.5, 0 },   { 0.5, 0, 0 } };
+  std::vector<uint32_t> inds = { 0, 1, 2, 0, 2, 3 };
+  m_mesh = deps->renderer->CreateMesh(verts, inds);
 }
 
 void GameState::Update()
 {
-
+  deps->renderer->Render(m_mesh);
 }
 int GameState::EventFilter(void *userdata, SDL_Event *event)
 {

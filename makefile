@@ -48,9 +48,9 @@ run: compile
   fi; \
 	$(BUILDDIR)/$(APPNAME) $(ARGS)
 
-preCompileHeader: $(ARGS)
+precompileHeader: $(ARGS)
 	$(ECHO)if [ $(PROGRESS) ]; then \
-		echo Compiling $(ARGS); \
+		echo Compiling $(notdir $(ARGS)); \
 	fi; \
 	g++ $(DEBUG) $(ARGS) -c $(addsufix .gch,$(ARGS)) $(INCLUDES) $(FLAGS) $(LIBS);
 

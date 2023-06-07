@@ -4,7 +4,7 @@
 
 #include "Debug.hpp"
 #include "Renderer.hpp"
-#include "RendererOpenGL.hpp"
+#include "RendererGL.hpp"
 
 namespace Tolik
 {
@@ -20,7 +20,7 @@ void Window::Init(bool *running, Debug *debug)
   m_debug = debug;
   m_running = running;
 
-  m_renderer = new RendererOpenGL(m_debug); // Here we decide what renderer will be used
+  m_renderer = new RendererGL(m_debug); // Here we decide what renderer will be used
 
   SDL_CALL(m_debug, SDL_Init(SDL_INIT_EVERYTHING) == 0);
   SDL_CALL(m_debug, m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, m_renderer->GetSDLWindowFlags()));

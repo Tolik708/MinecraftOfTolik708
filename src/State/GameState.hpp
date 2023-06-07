@@ -19,6 +19,7 @@ public:
 
 private:
   StateDeps *deps;
+  void *m_mesh;
 
   static int EventFilter(void *userdata, SDL_Event *event);
 };

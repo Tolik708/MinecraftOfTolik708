@@ -50,6 +50,7 @@
     "random": "cpp",
     "set": "cpp",
     "string": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "cassert": "cpp"
   }
 }

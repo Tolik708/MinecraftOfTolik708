@@ -30,5 +30,6 @@
 #include <set>
 #include <unordered_set>
 #include <typeinfo>
+#include <cassert>
 
 #endif
