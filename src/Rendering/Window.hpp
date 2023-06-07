@@ -6,21 +6,22 @@ class SDL_Window;
 namespace Tolik
 {
 class Debug;
-class RenderAPI;
+class Renderer;
 
 class Window
 {
 public:
   ~Window();
-  void Init(bool *running, Debug *debug, RenderAPI *renderAPI);
+  void Init(bool *running, Debug *debug);
   void ListenToEvents();
   inline SDL_Window *GetWindow() { return m_window; }
+  inline Renderer *GetRenderer() { return m_renderer; }
 
 private:
   bool *m_running;
-  SDL_Window *m_window;
   Debug *m_debug;
-  RenderAPI *m_api;
+  SDL_Window *m_window;
+  Renderer *m_renderer;
 };
 }
 

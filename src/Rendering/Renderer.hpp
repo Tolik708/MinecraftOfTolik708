@@ -1,28 +1,24 @@
-#ifndef RENDERER_HPP
-#define RENDERER_HPP
+#ifndef RENDERER__HPP
+#define RENDERER__HPP
+
+#include "Header.hpp"
 
 namespace Tolik
 {
-class Debug;
-class RenderAPI;
 class Window;
 
 class Renderer
 {
 public:
-  ~Renderer();
-  void Init(RenderAPI *renderAPI, Debug *debug, Window *window);
-  const RenderAPI &GetAPI() { return  *m_api; } 
+  virtual ~Renderer() = default;
 
-  void StartFrame();
-  void Render(void *model);
-  void EndFrame();
+  virtual void StartFrame() = 0;
+  virtual void Render() = 0;
+  virtual void *CreateMesh() = 0;
+  virtual void EndFrame() = 0;
 
-private:
-  RenderAPI *m_api;
-  Debug *m_debug;
-  Window *m_window;
-  void *context;
+  virtual void Init(Window *window) = 0;
+  virtual uint32_t GetSDLWindowFlags() = 0;
 };
 }
 

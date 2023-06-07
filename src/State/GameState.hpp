@@ -14,11 +14,10 @@ class GameState : public State
 public:
   GameState(StateDeps *newDeps);
 
+  virtual void Init() override;
   virtual void Update() override;
 
 private:
-  void Render();
-
   StateDeps *deps;
 
   static int EventFilter(void *userdata, SDL_Event *event);

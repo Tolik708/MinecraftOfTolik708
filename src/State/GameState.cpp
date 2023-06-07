@@ -7,18 +7,16 @@ namespace Tolik
 GameState::GameState(StateDeps *newDeps)
 {
   deps = newDeps;
+}
+
+void GameState::Init()
+{
   SDL_SetEventFilter(&EventFilter, nullptr);
 }
 
 void GameState::Update()
 {
 
-  
-  Render();
-}
-void GameState::Render()
-{
-  
 }
 int GameState::EventFilter(void *userdata, SDL_Event *event)
 {

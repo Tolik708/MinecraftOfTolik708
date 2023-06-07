@@ -38,6 +38,18 @@
     "tuple": "cpp",
     "typeindex": "cpp",
     "typeinfo": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "atomic": "cpp",
+    "cstdarg": "cpp",
+    "cstddef": "cpp",
+    "algorithm": "cpp",
+    "iterator": "cpp",
+    "map": "cpp",
+    "memory_resource": "cpp",
+    "numeric": "cpp",
+    "random": "cpp",
+    "set": "cpp",
+    "string": "cpp",
+    "cinttypes": "cpp"
   }
 }
