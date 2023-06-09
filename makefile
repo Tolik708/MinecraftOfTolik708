@@ -7,7 +7,7 @@ BUILDDIR := build
 APPNAME := main.exe
 DEBUG := -g
 FLAGS := -Wall -Wl,-subsystem,console
-LIBS :=  -Iglad/include -ISDL/include -LSDL/lib -lmingw32 -lSDL2main -lSDL2
+LIBS :=  -Iglm -Iglad/include -ISDL/include -LSDL/lib -lmingw32 -lSDL2main -lSDL2
 THIRDPARTY := glad/src/glad.o
 ARGS :=
 ECHO := @
@@ -31,17 +31,6 @@ LIBS := $(subst -I,-I$(LIBDIR)/,$(LIBS))
 LIBS := $(subst -L,-L$(LIBDIR)/,$(LIBS))
 THIRDPARTY := $(foreach path,$(THIRDPARTY),$(addprefix $(LIBDIR)/,$(path)))
 
-#$(info Sources $(SOURCES))
-#$(info  )
-#$(info Includes $(INCLUDES))
-#$(info  )
-#$(info INCLUDEFILES $(INCLUDEFILES))
-#$(info  )
-#$(info OBJS $(OBJS))
-#$(info  )
-#$(info Libs $(LIBS))
-#$(error Stop)
-
 run: compile
 	$(ECHO)if [ $(PROGRESS) ]; then \
     echo Run!; \
@@ -50,9 +39,12 @@ run: compile
 
 precompileHeader: $(ARGS)
 	$(ECHO)if [ $(PROGRESS) ]; then \
-		echo Compiling $(notdir $(ARGS)); \
+		echo Compiling $(notdir $(ARGS))...; \
 	fi; \
-	g++ $(DEBUG) $(ARGS) -c $(addsufix .gch,$(ARGS)) $(INCLUDES) $(FLAGS) $(LIBS);
+	g++ $(DEBUG) $(ARGS) -c $(addsufix .gch,$(ARGS)) $(INCLUDES) $(FLAGS) $(LIBS); \
+	if [ $(PROGRESS) ]; then \
+		echo Compiled!; \
+	fi;
 
 runDebug: compile
 	gdb --args $(BUILDDIR)/$(APPNAME) $(ARGS)

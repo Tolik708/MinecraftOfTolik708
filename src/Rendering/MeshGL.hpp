@@ -3,10 +3,13 @@
 
 #include "Header.hpp"
 
+#include "DefinesAndConstants.hpp"
 #include "Renderer.hpp"
 
 namespace Tolik
 {
+class ShaderGL;
+  
 class VBOGL
 {
 public:
@@ -57,6 +60,11 @@ struct BufferLayoutElementGL
 class BufferLayoutGL
 {
 public:
+  BufferLayoutGL() = default;
+  template<typename... Args> BufferLayoutGL(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
+
+  template<typename... Args> void Iterate(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
+  void Iterate() {}
   void AddBufferLayoutElement(uint32_t type, char size, char normalized);
   inline uint32_t GetStride() const { return m_stride; }
   inline const std::vector<BufferLayoutElementGL> &GetLayoutElements() const { return m_layoutElements; }
@@ -87,10 +95,12 @@ private:
 class MeshGL
 {
 public:
-  MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds);
+  MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, const BufferLayoutGL &layout, uint32_t meshType);
   void Draw();
+  inline uint32_t GetMeshType() const { return m_meshType; }
 
 private:
+  uint32_t m_meshType;
   VAOGL m_vao;
   VBOGL m_vbo;
   EBOGL m_ebo;

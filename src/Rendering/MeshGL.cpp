@@ -1,7 +1,8 @@
 #include "MeshGL.hpp"
 
 #include "Header.hpp"
-#include "DefinesAndConstants.hpp"
+
+#include "ShaderGL.hpp"
 
 namespace Tolik
 {
@@ -62,12 +63,13 @@ void VAOGL::AddEBO(const EBOGL &ebo)
   ebo.Bind();
 }
 
-MeshGL::MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds)
+
+MeshGL::MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, const BufferLayoutGL &layout, uint32_t meshType)
 {
+  m_meshType = meshType;
+
   m_vbo.BufferData(verts);
   m_ebo.BufferData(inds);
-  BufferLayoutGL layout;
-  layout.AddBufferLayoutElement(GL_FLOAT, 3, GL_FALSE);
   m_vao.AddVBO(m_vbo, layout);
   m_vao.AddEBO(m_ebo);
 }

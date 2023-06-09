@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
+#include <glm.hpp>
 
 #include <math.h>
 #include <stdint.h>
@@ -30,6 +31,7 @@
 #include <set>
 #include <unordered_set>
 #include <typeinfo>
+#include <initializer_list>
 #include <cassert>
 
 #endif

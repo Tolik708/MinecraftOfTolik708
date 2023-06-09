@@ -2,6 +2,7 @@
 
 #include "Header.hpp"
 
+#include "DefinesAndConstants.hpp"
 #include "Renderer.hpp"
 
 namespace Tolik
@@ -17,7 +18,7 @@ void GameState::Init()
 
   std::vector<Vertex> verts = { { 0, 0, 0 },   { 0, 0.5, 0 },   { 0.5, 0.5, 0 },   { 0.5, 0, 0 } };
   std::vector<uint32_t> inds = { 0, 1, 2, 0, 2, 3 };
-  m_mesh = deps->renderer->CreateMesh(verts, inds);
+  m_mesh = deps->renderer->CreateMesh(verts, inds, MeshType::Chunk);
 }
 
 void GameState::Update()
