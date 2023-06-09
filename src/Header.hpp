@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 #include <glm.hpp>
 
+#include <cstddef>
 #include <math.h>
 #include <stdint.h>
 #include <windows.h>

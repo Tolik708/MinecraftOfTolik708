@@ -7,12 +7,12 @@ namespace Tolik
 {
 class Debug;
 class Renderer;
-
 class Window
 {
 public:
+  Window(bool *running, Debug *debug);
   ~Window();
-  void Init(bool *running, Debug *debug);
+
   void ListenToEvents();
   inline SDL_Window *GetWindow() { return m_window; }
   inline Renderer *GetRenderer() { return m_renderer; }

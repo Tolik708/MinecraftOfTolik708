@@ -51,6 +51,7 @@
     "set": "cpp",
     "string": "cpp",
     "cinttypes": "cpp",
-    "cassert": "cpp"
+    "cassert": "cpp",
+    "queue": "cpp"
   }
 }

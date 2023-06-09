@@ -2,7 +2,6 @@
 
 #include "Header.hpp"
 
-#include "DefinesAndConstants.hpp"
 #include "Renderer.hpp"
 
 namespace Tolik

@@ -8,6 +8,7 @@
 namespace Tolik
 {
 class Window;
+class Database;
 
 struct Vertex
 {
@@ -19,7 +20,7 @@ struct Vertex
 */
 enum class MeshType : uint32_t
 {
-  None = 0, Chunk
+  Chunk = 0
 };
 
 class Renderer
@@ -32,14 +33,17 @@ public:
   virtual void *CreateMesh(std::vector<Vertex> verts, std::vector<uint32_t> inds, MeshType type) = 0;
   virtual void EndFrame() = 0;
 
-  virtual void Init(Window *window) = 0;
+  virtual void SetWindow(Window *window) = 0;
   virtual uint32_t GetSDLWindowFlags() = 0;
   virtual void UpdateDrawbleSize() = 0;
+
   inline int GetWidth() { return m_width; }
   inline int GetHeight() { return m_height; }
+  void InjectDatabase(Database *database) { m_database = database; }
 
 protected:
   int m_width, m_height;
+  Database *m_database;
 };
 }
 

@@ -11,23 +11,20 @@ namespace Tolik
 {
 Window::~Window()
 {
-  delete m_renderer;
   SDL_DestroyWindow(m_window);
   SDL_Quit();
 }
 
-void Window::Init(bool *running, Debug *debug)
+Window::Window(bool *running, Debug *debug)
+  : m_debug(debug),
+  m_running(running),
+  m_renderer(new RendererGL(m_debug)) // Here we decide what renderer we will use
 {
-  m_debug = debug;
-  m_running = running;
-
-  m_renderer = new RendererGL(m_debug); // Here we decide what renderer will be used
-
   SDL_CALL(m_debug, SDL_Init(SDL_INIT_EVERYTHING) == 0);
   SDL_CALL(m_debug, m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, m_renderer->GetSDLWindowFlags()));
   SDL_GetWindowSize(m_window, &m_width, &m_height);
 
-  m_renderer->Init(this);
+  m_renderer->SetWindow(this);
 }
 
 void Window::ListenToEvents()

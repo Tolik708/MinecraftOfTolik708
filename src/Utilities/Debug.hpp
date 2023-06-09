@@ -87,8 +87,8 @@ template<typename... Args> void Debug::LogMessage(const std::string &format, Arg
   std::vector<std::string> convertedArguments;
   Iterate(convertedArguments, args...);
 
-  uint32_t lastPos = 0;
-  uint32_t position = format.find('@', 0);
+  std::size_t lastPos = 0;
+  std::size_t position = format.find('@', 0);
 
   if (position == std::string::npos)
   {
@@ -98,7 +98,7 @@ template<typename... Args> void Debug::LogMessage(const std::string &format, Arg
 
   for (; position != std::string::npos; position++, position = format.find('@', position))
   {
-    uint32_t numberLength = 0;
+    std::size_t numberLength = 0;
     while (isdigit(format[position + numberLength + 1])) numberLength++;
     if (numberLength == 0)
       continue;

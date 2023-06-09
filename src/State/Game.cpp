@@ -4,20 +4,22 @@
 
 namespace Tolik
 {
-void Game::Init(StateDeps *deps)
+void Game::Game(StateDeps *deps)
+  : m_state(new GameState(deps)) // Here we dicide entry state of a game
 {
-  m_state = new GameState(deps); // Here we dicide entry state of a game
   m_state->Init();
 }
 
 void Game::Update()
 {
   m_state->Update();
-  if(latestState == nullptr)
+
+  if(pendingState == nullptr)
     return;
+  
   delete m_state; 
-  m_state = latestState;
-  latestState = nullptr;
+  m_state = pendingState;
+  pendingState = nullptr;
   m_state->Init();
 }
 }

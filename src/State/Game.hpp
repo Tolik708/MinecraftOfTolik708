@@ -1,7 +1,5 @@
-#ifndef CONTEXT_HPP
-#define CONTEXT_HPP
-
-#include "Header.hpp"
+#ifndef GAME_HPP
+#define GAME_HPP
 
 #include "State.hpp"
 #include "GameState.hpp"
@@ -10,19 +8,17 @@ namespace Tolik
 {
 class Game
 {
-  friend class Application;
 public:
-  ~Game() { delete m_state; delete latestState; }
+  Game(StateDeps *deps);
+  ~Game() { delete m_state; delete pendingState; }
 
-  template<typename T, std::enable_if_t<std::is_base_of<State, T>::value, bool> = true>
-  inline void ChangeState(T *newState) { delete latestState; latestState = newState; }
-
-private:
-  void Init(StateDeps *deps);
+  template<typename T> inline void ChangeState(T *newState) { delete pendingState; pendingState = newState; }
   void Update();
 
+private:
+
   State *m_state = nullptr;
-  State *latestState = nullptr;
+  State *pendingState = nullptr;
 };
 }
 

@@ -42,7 +42,7 @@ Debug::Debug() : m_paternIdentifier
 
 void Debug::LogInfo(const PaternType &patern)
 {
-	for (uint32_t i = 0; i < patern.size(); i++)
+	for (std_size_t i = 0; i < patern.size(); i++)
 	{
 		Print(patern[i].first);
 		if (patern[i].second != nullptr)
@@ -66,7 +66,7 @@ void Debug::SetPattern(const std::string &newPatern)
 
 	patern->clear();
 	patern->emplace_back();
-	for (uint32_t stringPos = 0; stringPos < newPatern.length(); stringPos++)
+	for (std::size_t stringPos = 0; stringPos < newPatern.length(); stringPos++)
 	{
 		if (newPatern[stringPos] == '@')
 		{
