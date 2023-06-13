@@ -23,6 +23,11 @@ enum class MeshType : uint32_t
   Chunk = 0
 };
 
+enum class RenderAPIType : char
+{
+  OpenGL
+};
+
 class Renderer
 {
 public:
@@ -41,6 +46,7 @@ public:
   inline int GetHeight() { return m_height; }
   void InjectDatabase(Database *database) { m_database = database; }
 
+  static RenderAPIType currenAPIType;
 protected:
   int m_width, m_height;
   Database *m_database;

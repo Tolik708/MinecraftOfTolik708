@@ -5,6 +5,9 @@
 
 namespace Tolik
 {
+class VBOGL;
+class EBOGL;
+
 struct BufferLayoutElementGL
 {
   static std::size_t GetSizeOfTypeGL(uint32_t type);

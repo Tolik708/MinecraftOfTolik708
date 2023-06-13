@@ -1,5 +1,7 @@
 #include "Database.hpp"
 
+#include "Header.hpp"
+
 #include "VAOGL.hpp"
 #include "ShaderGL.hpp"
 
@@ -9,15 +11,15 @@ Database::Database(Debug *debug, Identity<RendererGL> type)
   : m_debug(debug),
   m_meshTypeData
   {
-    MeshTypeIndexes(int{1, 1})
+    {1, 1}
   },
-  m_shaders
+  m_data1
   {
-    ShaderGL("res\\Shaders\\ChunkShader.vert", "res\\Shaders\\ChunkShader.frag", m_debug)
+    VariantDatabase<ShaderGL>(ShaderGL("res\\Shaders\\ChunkShader.vert", "res\\Shaders\\ChunkShader.frag", m_debug))
   },
-  m_layouts
+  m_data2
   {
-    BufferLayoutGL(GL_FLOAT, 3, GL_FALSE)
+    VariantDatabase<BufferLayoutGL>(BufferLayoutGL(GL_FLOAT, 3, GL_FALSE))
   }
 {}
 }
