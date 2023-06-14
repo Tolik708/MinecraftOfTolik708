@@ -16,8 +16,8 @@ Window::~Window()
 }
 
 Window::Window(bool *running, Debug *debug)
-  : m_debug(debug),
-  m_running(running),
+  : m_running(running),
+  m_debug(debug),
   m_renderer(new RendererGL(m_debug)) // Here we decide what renderer we will use
 {
   SDL_CALL(m_debug, SDL_Init(SDL_INIT_EVERYTHING) == 0);

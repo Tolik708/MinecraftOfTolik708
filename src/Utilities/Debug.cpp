@@ -42,7 +42,7 @@ Debug::Debug() : m_paternIdentifier
 
 void Debug::LogInfo(const PaternType &patern)
 {
-	for (std_size_t i = 0; i < patern.size(); i++)
+	for (std::size_t i = 0; i < patern.size(); i++)
 	{
 		Print(patern[i].first);
 		if (patern[i].second != nullptr)

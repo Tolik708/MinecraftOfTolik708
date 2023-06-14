@@ -46,7 +46,7 @@ public:
   inline int GetHeight() { return m_height; }
   void InjectDatabase(Database *database) { m_database = database; }
 
-  static RenderAPIType currenAPIType;
+  static RenderAPIType currentAPIType;
 protected:
   int m_width, m_height;
   Database *m_database;

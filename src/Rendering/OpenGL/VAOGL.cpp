@@ -2,6 +2,8 @@
 
 #include "Header.hpp"
 
+#include "BuffersGL.hpp"
+
 namespace Tolik
 {
 std::size_t BufferLayoutElementGL::GetSizeOfTypeGL(uint32_t type)

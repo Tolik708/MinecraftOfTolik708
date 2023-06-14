@@ -2,6 +2,8 @@
 
 #include "Header.hpp"
 
+#include "Renderer.hpp"
+
 namespace Tolik
 {
 void VBOGL::BufferData(const std::vector<Vertex> &verts) const

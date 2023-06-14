@@ -28,7 +28,7 @@ public:
   template<typename... Args> BufferLayoutGL(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
 
   template<typename... Args> void Iterate(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
-  void Iterate() {}
+  inline void Iterate() {}
   void AddBufferLayoutElement(uint32_t type, char size, char normalized);
   inline std::size_t GetStride() const { return m_stride; }
   inline const std::vector<BufferLayoutElementGL> &GetLayoutElements() const { return m_layoutElements; }
@@ -43,6 +43,7 @@ class VAOGL
 {
 public:
   VAOGL() { glGenVertexArrays(1, &m_id); }
+  VAOGL(VAOGL &&move) { m_id = std::move(move.m_id); move.m_id = 0; }
   ~VAOGL() { glDeleteVertexArrays(1, &m_id); }
 
   inline void Bind() { glBindVertexArray(m_id); }

@@ -13,6 +13,7 @@ class MeshGL
 {
 public:
   MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, const BufferLayoutGL &layout, MeshType meshType);
+  
   void Draw();
   inline MeshType GetMeshType() const { return m_meshType; }
 

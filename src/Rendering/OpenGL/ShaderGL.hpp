@@ -13,6 +13,7 @@ class ShaderGL
 {
 public:
   ShaderGL(const std::string &vertexShaderPath, const std::string &fragmentShaderPath, Debug *debug);
+  ShaderGL(ShaderGL &&move) { m_id = std::move(move.m_id); move.m_id = 0; }
   ~ShaderGL() { glDeleteProgram(m_id); }
 
   inline void Use() const { glUseProgram(m_id); }

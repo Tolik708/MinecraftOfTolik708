@@ -24,7 +24,7 @@ public:
   ~VariantDatabase();
 
   template<typename T, std::enable_if_t<IsIn<T, Types...>::value, bool> = true>
-  inline const T &Get() { return reinterpret_cast<const T*>(&buffer); }
+  inline const T &Get() const { return *reinterpret_cast<const T*>(&buffer); }
 
 private:
   typename std::aligned_union<0, Types...>::type buffer;
@@ -32,7 +32,7 @@ private:
 
 template<typename... Types> VariantDatabase<Types...>::~VariantDatabase()
 {
-  switch(Renderer::currenAPIType)
+  switch(Renderer::currentAPIType)
   {
     case RenderAPIType::OpenGL:
       DestroyAt(reinterpret_cast<const typename GetTypeInPlace<0, Types...>::type*>(&buffer));
@@ -55,16 +55,10 @@ private:
   const std::array<VariantDatabase<BufferLayoutGL>, 1> m_data2;
 };
 
-template <typename T> inline const T &Database::GetMeshTypeData(MeshType meshType)
-{
-  switch(HeshType<T>())
-  {
-    case HeshType<ShaderGL>():
-      return m_data1[m_meshTypeData[static_cast<std::size_t>(meshType)][0]].Get<T>();
-    case HeshType<BufferLayoutGL>():
-      return m_data2[m_meshTypeData[static_cast<std::size_t>(meshType)][1]].Get<T>();
-  }
-}
+template<> inline const ShaderGL &Database::GetMeshTypeData<ShaderGL>(MeshType meshType)
+{ return m_data1[m_meshTypeData[static_cast<std::size_t>(meshType)][0]].Get<ShaderGL>(); }
+template<> inline const BufferLayoutGL &Database::GetMeshTypeData<BufferLayoutGL>(MeshType meshType)
+{ return m_data2[m_meshTypeData[static_cast<std::size_t>(meshType)][1]].Get<BufferLayoutGL>(); }
 }
 
 #endif
