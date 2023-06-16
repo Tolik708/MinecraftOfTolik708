@@ -21,6 +21,13 @@ MeshGL::MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &in
   m_vao.AddEBO(m_ebo);
 }
 
+MeshGL::~MeshGL()
+{
+  m_vao.Delete();
+  m_vbo.Delete();
+  m_ebo.Delete();
+}
+
 void MeshGL::Draw()
 {
   m_vao.Bind();

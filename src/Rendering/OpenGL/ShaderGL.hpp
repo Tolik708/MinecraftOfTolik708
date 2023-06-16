@@ -14,6 +14,7 @@ class ShaderGL
 {
 public:
   ShaderGL(const std::string &vertexShaderPath, const std::string &fragmentShaderPath, Debug *debug);
+  inline void Delete() const { glDeleteProgram(m_id); }
 
   inline void Use() const { GL_CALL(m_debug, glUseProgram(m_id)); }
 

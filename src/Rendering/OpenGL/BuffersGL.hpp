@@ -13,7 +13,7 @@ class VBOGL
 {
 public:
   VBOGL(Debug *debug) : m_debug(debug) { GL_CALL(m_debug, glGenBuffers(1, &m_id)); }
-  ~VBOGL() { GL_CALL(m_debug, glDeleteBuffers(1, &m_id)); }
+  inline void Delete() const { glDeleteBuffers(1, &m_id); }
 
   inline void Bind() const { GL_CALL(m_debug, glBindBuffer(GL_ARRAY_BUFFER, m_id)); }
   inline void Unbind() const { GL_CALL(m_debug, glBindBuffer(GL_ARRAY_BUFFER, 0)); }
@@ -30,7 +30,7 @@ class EBOGL
 {
 public:
   EBOGL(Debug *debug) : m_debug(debug) { GL_CALL(m_debug, glGenBuffers(1, &m_id)); }
-  ~EBOGL() { GL_CALL(m_debug, glDeleteBuffers(1, &m_id)); }
+  inline void Delete() const { glDeleteBuffers(1, &m_id); }
 
   inline void Bind() const { GL_CALL(m_debug, glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_id)); }
   inline void Unbind() const { GL_CALL(m_debug, glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); }

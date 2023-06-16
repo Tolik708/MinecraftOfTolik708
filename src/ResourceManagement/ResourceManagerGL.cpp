@@ -19,4 +19,10 @@ ResourceManagerGL::ResourceManagerGL(Debug *debug)
     BufferLayoutGL(GL_FLOAT, 3, GL_FALSE)
   }
 {}
+
+ResourceManagerGL::~ResourceManagerGL()
+{
+  for(uint32_t i = 0; i < m_shaders.size(); i++)
+    m_shaders[i].Delete();
+}
 }

@@ -45,7 +45,7 @@ class VAOGL
 {
 public:
   VAOGL(Debug *debug) { GL_CALL(m_debug, glGenVertexArrays(1, &m_id)); }
-  ~VAOGL() { GL_CALL(m_debug, glDeleteVertexArrays(1, &m_id)); }
+  inline void Delete() const { glDeleteVertexArrays(1, &m_id); }
 
   inline void Bind() { GL_CALL(m_debug, glBindVertexArray(m_id)); }
   inline void Unbind() { GL_CALL(m_debug, glBindVertexArray(0)); }
