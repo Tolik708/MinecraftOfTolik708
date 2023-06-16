@@ -44,12 +44,9 @@ public:
 
   inline int GetWidth() { return m_width; }
   inline int GetHeight() { return m_height; }
-  void InjectDatabase(Database *database) { m_database = database; }
 
-  static RenderAPIType currentAPIType;
 protected:
   int m_width, m_height;
-  Database *m_database;
 };
 }
 

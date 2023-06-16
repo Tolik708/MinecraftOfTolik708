@@ -28,6 +28,7 @@ private:
   Debug *m_debug;
   Window *m_window;
   SDL_GLContext m_context;
+  
 };
 }
 

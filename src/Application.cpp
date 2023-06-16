@@ -14,11 +14,8 @@ class RendererGL;
 
 Application::Application()
   : m_window(&m_running, &m_debug),
-  m_database(&m_debug, Identity<RendererGL>()),
   m_game(new StateDeps(&m_debug, &m_game, m_window.GetRenderer()))
-{
-
-}
+{}
 
 void Application::Run()
 {

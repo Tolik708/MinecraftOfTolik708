@@ -2,7 +2,6 @@
 
 #include "Header.hpp"
 
-#include "Database.hpp"
 #include "Window.hpp"
 #include "Debug.hpp"
 #include "ShaderGL.hpp"
@@ -38,13 +37,13 @@ void RendererGL::StartFrame()
 void RendererGL::Render(void *mesh)
 {
   MeshGL *convertedMesh = reinterpret_cast<MeshGL*>(mesh);
-  m_database->GetMeshTypeData<ShaderGL>(convertedMesh->GetMeshType()).Use();
+  // Use shader
   convertedMesh->Draw();
 }
 
 void *RendererGL::CreateMesh(std::vector<Vertex> verts, std::vector<uint32_t> inds, MeshType meshType)
 {
-  return new MeshGL(verts, inds, m_database->GetMeshTypeData<BufferLayoutGL>(meshType), meshType);
+  return new MeshGL(verts, inds, /* Pass layout from resource manager */ , meshType);
 }
 
 void RendererGL::EndFrame()

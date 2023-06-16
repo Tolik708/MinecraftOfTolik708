@@ -3,7 +3,6 @@
 
 #include "Debug.hpp"
 #include "Window.hpp"
-#include "Database.hpp"
 #include "Game.hpp"
 
 
@@ -19,7 +18,6 @@ private:
   bool m_running = false;
   Debug m_debug;
   Window m_window;
-  Database m_database;
   Game m_game;
 };
 }
