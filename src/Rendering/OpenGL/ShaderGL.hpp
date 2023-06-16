@@ -4,6 +4,7 @@
 #include "Header.hpp"
 
 #include "FileReader.hpp"
+#include "Debug.hpp"
 
 namespace Tolik
 {
@@ -13,15 +14,12 @@ class ShaderGL
 {
 public:
   ShaderGL(const std::string &vertexShaderPath, const std::string &fragmentShaderPath, Debug *debug);
-  ShaderGL(ShaderGL &&move) { m_id = std::move(move.m_id); move.m_id = 0; }
-  ~ShaderGL() { glDeleteProgram(m_id); }
 
-  inline void Use() const { glUseProgram(m_id); }
+  inline void Use() const { GL_CALL(m_debug, glUseProgram(m_id)); }
 
 private:
-  void CheckForErrors(uint32_t shader, uint32_t error, Debug *debug) const;
-
   uint32_t m_id;
+  Debug *m_debug;
 };
 }
 

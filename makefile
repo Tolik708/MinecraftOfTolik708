@@ -6,7 +6,7 @@ BUILDDIR := build
 #variables
 APPNAME := main.exe
 DEBUG := -g
-FLAGS := -Wall -Wl,-subsystem,console
+FLAGS := -Wall -Wl,-subsystem,console -std=c++11
 LIBS :=  -Iglm -Iglad/include -ISDL/include -LSDL/lib -lmingw32 -lSDL2main -lSDL2
 THIRDPARTY := glad/src/glad.o
 ARGS :=
@@ -46,7 +46,7 @@ precompileHeader: $(ARGS)
 		echo Compiled!; \
 	fi;
 
-runDebug: compile
+debug: compile
 	gdb --args $(BUILDDIR)/$(APPNAME) $(ARGS)
 
 compile: $(OBJS)

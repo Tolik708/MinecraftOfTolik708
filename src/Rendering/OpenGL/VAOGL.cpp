@@ -36,8 +36,8 @@ void VAOGL::AddVBO(const VBOGL &vbo, const BufferLayoutGL &layout)
 
   for(std::size_t i = 0; i < elements.size(); i++)
   {
-    glVertexAttribPointer(i, elements[i].size, elements[i].type, elements[i].normalized, layout.GetStride(), reinterpret_cast<void*>(static_cast<intptr_t>(elements[i].offset)));
-    glEnableVertexAttribArray(i);
+    GL_CALL(m_debug, glVertexAttribPointer(i, elements[i].size, elements[i].type, elements[i].normalized, layout.GetStride(), reinterpret_cast<void*>(static_cast<intptr_t>(elements[i].offset))));
+    GL_CALL(m_debug, glEnableVertexAttribArray(i));
   }
 }
 

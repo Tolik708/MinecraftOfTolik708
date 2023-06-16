@@ -4,6 +4,7 @@
 #include "Header.hpp"
 
 #include "Renderer.hpp"
+#include "ResourceManagerGL.hpp"
 
 namespace Tolik
 {
@@ -14,11 +15,12 @@ class RendererGL : public Renderer
 {
 public:
   RendererGL(Debug *debug);
+  ~RendererGL();
   virtual void SetWindow(Window *window) override;
 
   virtual void StartFrame() override;
   virtual void Render(void *mesh) override;
-  virtual void *CreateMesh(std::vector<Vertex> verts, std::vector<uint32_t> inds, MeshType type) override;
+  virtual void *CreateMesh(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, MeshType type) override;
   virtual void EndFrame() override;
 
   virtual uint32_t GetSDLWindowFlags() override;
@@ -28,7 +30,7 @@ private:
   Debug *m_debug;
   Window *m_window;
   SDL_GLContext m_context;
-  
+  ResourceManagerGL *resources;
 };
 }
 

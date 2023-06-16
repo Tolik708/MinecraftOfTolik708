@@ -35,7 +35,7 @@ public:
 
   virtual void StartFrame() = 0;
   virtual void Render(void *mesh) = 0;
-  virtual void *CreateMesh(std::vector<Vertex> verts, std::vector<uint32_t> inds, MeshType type) = 0;
+  virtual void *CreateMesh(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, MeshType type) = 0;
   virtual void EndFrame() = 0;
 
   virtual void SetWindow(Window *window) = 0;

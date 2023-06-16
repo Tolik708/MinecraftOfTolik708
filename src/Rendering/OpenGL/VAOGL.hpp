@@ -3,6 +3,8 @@
 
 #include "Header.hpp"
 
+#include "Debug.hpp"
+
 namespace Tolik
 {
 class VBOGL;
@@ -42,18 +44,18 @@ private:
 class VAOGL
 {
 public:
-  VAOGL() { glGenVertexArrays(1, &m_id); }
-  VAOGL(VAOGL &&move) { m_id = std::move(move.m_id); move.m_id = 0; }
-  ~VAOGL() { glDeleteVertexArrays(1, &m_id); }
+  VAOGL(Debug *debug) { GL_CALL(m_debug, glGenVertexArrays(1, &m_id)); }
+  ~VAOGL() { GL_CALL(m_debug, glDeleteVertexArrays(1, &m_id)); }
 
-  inline void Bind() { glBindVertexArray(m_id); }
-  inline void Unbind() { glBindVertexArray(0); }
+  inline void Bind() { GL_CALL(m_debug, glBindVertexArray(m_id)); }
+  inline void Unbind() { GL_CALL(m_debug, glBindVertexArray(0)); }
 
   void AddVBO(const VBOGL &vbo, const BufferLayoutGL &layout);
   void AddEBO(const EBOGL &ebo);
 
 private:
   uint32_t m_id;
+  Debug *m_debug;
 };
 }
 

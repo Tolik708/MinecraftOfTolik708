@@ -82,10 +82,10 @@ template<std::size_t Num, typename T> struct GetTypeInPlace<Num, T>
 template<std::size_t Num, typename T, typename... Types> struct GetTypeInPlace<Num, T, Types...>
 { using type = typename std::conditional<Num != 0, typename GetTypeInPlace<Num - 1, Types...>::type, T>::type; };
 
-template<typename T, std::enable_if_t<!std::is_array<T>::value, bool> = true> constexpr void DestroyAt(T *object)
+template<typename T, typename std::enable_if<!std::is_array<T>::value, bool>::type = true> constexpr void DestroyAt(T *object)
 { object->~T(); }
 
-template<typename T, std::enable_if_t<std::is_array<T>::value, bool> = true> constexpr void DestroyAt(T *object)
+template<typename T, typename std::enable_if<std::is_array<T>::value, bool>::type = true> constexpr void DestroyAt(T *object)
 {
 	for(std::size_t i = 0; i < sizeof(T)/sizeof(T[0]); i++)
 		DestroyAt((*object)[i]);
