@@ -8,12 +8,8 @@
 
 namespace Tolik
 {
-MeshGL::MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, const BufferLayoutGL &layout, MeshType meshType, Debug *debug)
-  : m_debug(debug),
-  m_meshType(meshType),
-  m_vao(m_debug),
-  m_vbo(m_debug),
-  m_ebo(m_debug)
+MeshGL::MeshGL(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, const BufferLayoutGL &layout, MeshType meshType)
+  : m_meshType(meshType)
 {
   m_vbo.BufferData(verts);
   m_ebo.BufferData(inds);
@@ -31,6 +27,6 @@ MeshGL::~MeshGL()
 void MeshGL::Draw()
 {
   m_vao.Bind();
-  GL_CALL(m_debug, glDrawElements(GL_TRIANGLES, m_ebo.GetCount(), GL_UNSIGNED_INT, 0));
+  GL_CALL(glDrawElements(GL_TRIANGLES, m_ebo.GetCount(), GL_UNSIGNED_INT, 0));
 }
 }

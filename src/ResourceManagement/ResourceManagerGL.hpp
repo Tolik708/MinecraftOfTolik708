@@ -14,7 +14,7 @@ class Debug;
 class ResourceManagerGL
 {
 public:
-  ResourceManagerGL(Debug *debug);
+  ResourceManagerGL();
   ~ResourceManagerGL();
   const ShaderGL &GetShader(MeshType meshType) { return m_shaders[m_indexes[meshType][0]]; }
   const BufferLayoutGL &GetLayout(MeshType meshType) { return m_layouts[m_indexes[meshType][1]]; }

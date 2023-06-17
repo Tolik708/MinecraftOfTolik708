@@ -14,7 +14,7 @@ class Window;
 class RendererGL : public Renderer
 {
 public:
-  RendererGL(Debug *debug);
+  RendererGL();
   ~RendererGL();
   virtual void SetWindow(Window *window) override;
 
@@ -27,7 +27,6 @@ public:
   virtual void UpdateDrawbleSize() override;
   
 private:
-  Debug *m_debug;
   Window *m_window;
   SDL_GLContext m_context;
   ResourceManagerGL *resources;

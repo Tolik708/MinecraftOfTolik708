@@ -21,17 +21,17 @@ struct LoggerState
 
 class Logger
 {
-  using PatternType = std::vector<std::pair<std::string, std::function<std::string(const LoggerState&)>>>;
-  using PatterIdentifierType = std::unordered_map<char, std::function<std::string(const LoggerState&)>>;
+  using PatternType = std::vector<std::pair<std::string, std::function<std::string(const LoggerState*)>>>;
+  using PatterIdentifierType = std::unordered_map<char, std::function<std::string(const LoggerState*)>>;
 public:
-  Logger(Debug *debug, const std::string &name, const std::string &pattern = "[@T] @M\n");
+  Logger(const std::string &patternString);
 
-  template<typename... Args> inline void Warning(const std::string &format, Args&&... args) 
-  { state.logTpye = LogType::Warning; LogInfo(m_patern); LogMessage(format, args...); LogInfo(m_postPatern); }
-  template<typename... Args> inline void Error  (const std::string &format, Args&&... args) 
-  { state.logTpye = LogType::Error; LogInfo(m_patern); LogMessage(format, args...); LogInfo(m_postPatern); }
-  template<typename... Args> inline void Info   (const std::string &format, Args&&... args) 
-  { state.logTpye = LogType::Info; LogInfo(m_patern); LogMessage(format, args...); LogInfo(m_postPatern); }
+  template<typename... Args> inline void Warning(const std::string &format, Args&&... args)
+  { state.logTpye = LogType::Warning; LogInfo(m_pattern); LogMessage(format, args...); LogInfo(m_postPattern); }
+  template<typename... Args> inline void Error  (const std::string &format, Args&&... args)
+  { state.logTpye = LogType::Error; LogInfo(m_pattern); LogMessage(format, args...); LogInfo(m_postPattern); }
+  template<typename... Args> inline void Info   (const std::string &format, Args&&... args)
+  { state.logTpye = LogType::Info; LogInfo(m_pattern); LogMessage(format, args...); LogInfo(m_postPattern); }
 
 private:
   void LogInfo(const PatternType &patern) const;
@@ -48,7 +48,7 @@ private:
 
   LoggerState state;
 
-  static const std::ostringstream s_stream;
+  static std::ostringstream s_stream;
   static const std::unordered_map<LogType, std::string> s_logTypeNameMap;
   static const std::unordered_map<LogType, uint32_t> s_logTypeColorMap;
   static const PatterIdentifierType s_patternIdentifier;

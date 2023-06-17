@@ -18,32 +18,31 @@ const std::unordered_map<GLenum, std::string> Debug::GLErrorsNamesMap =
 	{ GL_STACK_OVERFLOW,                "GL_STACK_OVERFLOW" }
 };
 
-static Debug s_instancce = Debug();
+Debug Debug::s_instance = Debug();
 
 Debug::Debug()
 {
-  AddLogger("main");
-
+  AddLogger("main", Logger("[@T] @M\n"));
 }
 
 void Debug::AddLogger(const std::string &name, const Logger &logger)
 {
-	std::unordered_map<std::string, Logger>::iterator it = m_loggers.find(name);
-	if(it == m_loggers.end())
+	std::unordered_map<std::string, Logger>::iterator it = s_instance.m_loggers.find(name);
+	if(it != s_instance.m_loggers.end())
 	{
-		GetLogger("main").Error("logger with name: \'@0\', already exists", name);
+		GetLogger("main").Error("Logger with name: \'@0\', already exists", name);
 		return;
 	}
-	m_loggers.emplace_hint(it, logger);
+	s_instance.m_loggers.emplace_hint(it, name, logger);
 }
 
-const Logger &Debug::GetLogger(const std::string &name)
+Logger &Debug::GetLogger(const std::string &name)
 {
-  std::unordered_map<std::string, Logger>::iterator it = m_loggers.find(name);
-	if(it == m_loggers.end())
+  std::unordered_map<std::string, Logger>::iterator it = s_instance.m_loggers.find(name);
+	if(it == s_instance.m_loggers.end())
 	{
 		GetLogger("main").Error("No logger with name: \'@0\'", name);
-		return m_loggers.at("main");
+		return s_instance.m_loggers.at("main");
 	}
 	return it->second;
 }

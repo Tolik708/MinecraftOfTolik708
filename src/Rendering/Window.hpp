@@ -10,7 +10,7 @@ class Renderer;
 class Window
 {
 public:
-  Window(bool *running, Debug *debug);
+  Window(bool *running);
   ~Window();
 
   void ListenToEvents();
@@ -21,7 +21,6 @@ public:
 
 private:
   bool *m_running;
-  Debug *m_debug;
   SDL_Window *m_window;
   Renderer *m_renderer;
   int m_width, m_height;

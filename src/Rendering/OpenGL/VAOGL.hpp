@@ -27,7 +27,8 @@ class BufferLayoutGL
 {
 public:
   BufferLayoutGL() = default;
-  template<typename... Args> BufferLayoutGL(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
+  template<typename... Args, typename std::enable_if<(sizeof...(Args) % 3) == 0, bool>::type = true>
+  BufferLayoutGL(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
 
   template<typename... Args> void Iterate(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
   inline void Iterate() {}
@@ -44,18 +45,17 @@ private:
 class VAOGL
 {
 public:
-  VAOGL(Debug *debug) { GL_CALL(m_debug, glGenVertexArrays(1, &m_id)); }
-  inline void Delete() const { glDeleteVertexArrays(1, &m_id); }
+  VAOGL() { GL_CALL(glGenVertexArrays(1, &m_id)); }
+  inline void Delete() const { GL_CALL(glDeleteVertexArrays(1, &m_id)); }
 
-  inline void Bind() { GL_CALL(m_debug, glBindVertexArray(m_id)); }
-  inline void Unbind() { GL_CALL(m_debug, glBindVertexArray(0)); }
+  inline void Bind() { GL_CALL(glBindVertexArray(m_id)); }
+  inline void Unbind() { GL_CALL(glBindVertexArray(0)); }
 
   void AddVBO(const VBOGL &vbo, const BufferLayoutGL &layout);
   void AddEBO(const EBOGL &ebo);
 
 private:
   uint32_t m_id;
-  Debug *m_debug;
 };
 }
 

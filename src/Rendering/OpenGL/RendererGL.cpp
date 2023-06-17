@@ -9,8 +9,7 @@
 
 namespace Tolik
 {
-RendererGL::RendererGL(Debug *debug)
-  : m_debug(debug)
+RendererGL::RendererGL()
 {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -27,18 +26,18 @@ RendererGL::~RendererGL()
 void RendererGL::SetWindow(Window *window)
 {
   m_window = window;
-  SDL_CALL(m_debug, (m_context = SDL_GL_CreateContext(m_window->GetWindow())) != NULL);
-  GL_CALL(m_debug, gladLoadGLLoader(SDL_GL_GetProcAddress));
+  SDL_CALL((m_context = SDL_GL_CreateContext(m_window->GetWindow())) != NULL);
+  GL_CALL(gladLoadGLLoader(SDL_GL_GetProcAddress));
 
   UpdateDrawbleSize();
-  resources = new ResourceManagerGL(m_debug);
-  GL_CALL(m_debug, glClearColor(0.2, 0.2, 0.2, 1));
-  GL_CALL(m_debug, glViewport(0, 0, m_width, m_height));
+  resources = new ResourceManagerGL();
+  GL_CALL(glClearColor(0.2, 0.2, 0.2, 1));
+  GL_CALL(glViewport(0, 0, m_width, m_height));
 }
 
 void RendererGL::StartFrame()
 {
-  GL_CALL(m_debug, glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
+  GL_CALL(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
 }
 
 void RendererGL::Render(void *mesh)
@@ -50,7 +49,7 @@ void RendererGL::Render(void *mesh)
 
 void *RendererGL::CreateMesh(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, MeshType meshType)
 {
-  return new MeshGL(verts, inds, resources->GetLayout(meshType), meshType, m_debug);
+  return new MeshGL(verts, inds, resources->GetLayout(meshType), meshType);
 }
 
 void RendererGL::EndFrame()

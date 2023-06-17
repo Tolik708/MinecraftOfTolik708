@@ -13,14 +13,13 @@ class Debug;
 class ShaderGL
 {
 public:
-  ShaderGL(const std::string &vertexShaderPath, const std::string &fragmentShaderPath, Debug *debug);
-  inline void Delete() const { glDeleteProgram(m_id); }
+  ShaderGL(const std::string &vertexShaderPath, const std::string &fragmentShaderPath);
+  inline void Delete() const { GL_CALL(glDeleteProgram(m_id)); }
 
-  inline void Use() const { GL_CALL(m_debug, glUseProgram(m_id)); }
+  inline void Use() const { GL_CALL(glUseProgram(m_id)); }
 
 private:
   uint32_t m_id;
-  Debug *m_debug;
 };
 }
 

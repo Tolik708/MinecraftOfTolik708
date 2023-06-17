@@ -18,7 +18,7 @@ std::size_t BufferLayoutElementGL::GetSizeOfTypeGL(uint32_t type)
     return sizeof(char);
   }
 
-  std::cerr << "No such GL type" << std::endl;
+  Debug::GetLogger("main").Error("No GL_TYPE with index: @0", type);
   return 4; //hoping that we will hit
 }
 
@@ -36,8 +36,8 @@ void VAOGL::AddVBO(const VBOGL &vbo, const BufferLayoutGL &layout)
 
   for(std::size_t i = 0; i < elements.size(); i++)
   {
-    GL_CALL(m_debug, glVertexAttribPointer(i, elements[i].size, elements[i].type, elements[i].normalized, layout.GetStride(), reinterpret_cast<void*>(static_cast<intptr_t>(elements[i].offset))));
-    GL_CALL(m_debug, glEnableVertexAttribArray(i));
+    GL_CALL(glVertexAttribPointer(i, elements[i].size, elements[i].type, elements[i].normalized, layout.GetStride(), reinterpret_cast<void*>(static_cast<intptr_t>(elements[i].offset))));
+    GL_CALL(glEnableVertexAttribArray(i));
   }
 }
 

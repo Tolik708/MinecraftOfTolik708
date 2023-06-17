@@ -5,14 +5,14 @@
 
 namespace Tolik
 {
-ResourceManagerGL::ResourceManagerGL(Debug *debug)
+ResourceManagerGL::ResourceManagerGL()
   : m_indexes
   {
     { MeshType::Chunk, {0, 0} }
   },
   m_shaders
   {
-    ShaderGL("res\\Shaders\\ChunkShader.vert", "res\\Shaders\\ChunkShader.frag", debug)
+    ShaderGL("res\\Shaders\\ChunkShader.vert", "res\\Shaders\\ChunkShader.frag")
   },
   m_layouts
   {

@@ -15,13 +15,12 @@ Window::~Window()
   SDL_Quit();
 }
 
-Window::Window(bool *running, Debug *debug)
+Window::Window(bool *running)
   : m_running(running),
-  m_debug(debug),
-  m_renderer(new RendererGL(m_debug)) // Here we decide what renderer we will use
+  m_renderer(new RendererGL()) // Here we decide what render API we will use
 {
-  SDL_CALL(m_debug, SDL_Init(SDL_INIT_EVERYTHING) == 0);
-  SDL_CALL(m_debug, m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, m_renderer->GetSDLWindowFlags()));
+  SDL_CALL(SDL_Init(SDL_INIT_EVERYTHING) == 0);
+  SDL_CALL(m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, m_renderer->GetSDLWindowFlags()));
   SDL_GetWindowSize(m_window, &m_width, &m_height);
 
   m_renderer->SetWindow(this);
@@ -47,7 +46,7 @@ void Window::ListenToEvents()
       }
       break;
     default:
-      m_debug->Warning("Unhandlet SDL_Event: @0", event.type);
+      Debug::GetLogger("main").Warning("Unhandlet SDL_Event: @0", event.type);
       break;
     }
   }

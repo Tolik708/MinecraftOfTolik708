@@ -9,8 +9,7 @@ class Game;
 
 struct StateDeps
 {
-  StateDeps(Debug *newDebug, Game *newGame, Renderer *newRenderer) : debug(newDebug), game(newGame), renderer(newRenderer) {}
-  Debug *debug;
+  StateDeps(Game *newGame, Renderer *newRenderer) : game(newGame), renderer(newRenderer) {}
   Game *game;
   Renderer *renderer;
 };
