@@ -3,6 +3,8 @@
 
 #include "Header.hpp"
 
+#include "Constants.hpp"
+
 namespace Tolik
 {
 static constexpr unsigned int crcTable[256] = {
@@ -91,16 +93,8 @@ template<typename T, typename std::enable_if<std::is_array<T>::value, bool>::typ
 		DestroyAt((*object)[i]);
 }
 
-template <class To, class From>
-To BitCast(From from) {
-  static_assert(sizeof(To) == sizeof(From), "Types in BitCast must match sizes");
-  static_assert(std::is_pod<To>::value, "Requires POD input in BitCast");
-  static_assert(std::is_pod<From>::value, "Requires POD output in BitCast");
-
-  To to;
-  std::memcpy(std::addressof(to), std::addressof(from), sizeof(from));
-  return to;
-}
+constexpr float DegreesToRadians(float degrees) { return degrees * (Constants::PI / 180); }
+constexpr float RadiansToDegrees(float radians) { return radians * (180 / Constants::PI); }
 }
 
 #endif

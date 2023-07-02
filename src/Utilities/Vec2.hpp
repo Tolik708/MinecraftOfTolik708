@@ -25,27 +25,30 @@ struct Vec2
   inline float Magnitude() const { return sqrt(SqrMagnitude()); }
   void ClampMagnitude(float minMagnitude, float maxMagnitude);
   inline void Round() { x = round(x); y = round(y); }
+  inline void Abs() { x = abs(x); y = abs(y); }
+  inline void MakeAbsolute() { x = abs(x); y = abs(y); } 
   Vec2 Normalized() const;
   void Normalize();
 
   inline float& operator[](int i) { return padding[i]; }
   inline float operator[](int i) const { return padding[i]; }
-  inline Vec2 operator+(const Vec2 &vector) const { return Vec2(x + vector[0], y + vector[1]); }
-  inline Vec2 operator-(const Vec2 &vector) const { return Vec2(x - vector[0], y - vector[1]); }
-  inline Vec2 operator*(const Vec2 &vector) const { return Vec2(x * vector[0], y * vector[1]); }
-  inline Vec2 operator/(const Vec2 &vector) const { return Vec2(x / vector[0], y / vector[1]); }
+  inline Vec2 operator+(const Vec2 &vector) const { return Vec2(x + vector.x, y + vector.y); }
+  inline Vec2 operator-(const Vec2 &vector) const { return Vec2(x - vector.x, y - vector.y); }
+  inline Vec2 operator*(const Vec2 &vector) const { return Vec2(x * vector.x, y * vector.y); }
+  inline Vec2 operator/(const Vec2 &vector) const { return Vec2(x / vector.x, y / vector.y); }
   inline Vec2 operator+(float num) const { return Vec2(x + num, y + num); }
   inline Vec2 operator-(float num) const { return Vec2(x - num, y - num); }
   inline Vec2 operator*(float num) const { return Vec2(x * num, y * num); }
   inline Vec2 operator/(float num) const { return Vec2(x / num, y / num); }
   inline Vec2 operator-() const { return Vec2(-x, -y); }
-  inline friend std::ostream& operator<<(std::ostream& os, Vec2 const& self) { return os << "Vec3 " << self[0] << ' ' << self[1]; }
+  inline friend std::ostream& operator<<(std::ostream& os, const Vec2 &self) { return os << "Vec3 " << self.x << ' ' << self.y; }
   
   inline static Vec2 Lerp(const Vec2 &a, const Vec2 &b, float t) { return a * (1 - t) + (b * t); }
-  inline static float Dot(const Vec2 &a, const Vec2 &b) { return a[0] * b[0] + a[1] * b[1]; }
-  inline static Vec2 Min(const Vec2 &a, const Vec2 &b) { return Vec2(std::min(a[0], b[0]), std::min(a[1], b[1])); } //smallest from 2 vectors
-  inline static Vec2 Max(const Vec2 &a, const Vec2 &b) { return Vec2(std::max(a[0], b[0]), std::max(a[1], b[1])); } //biggest from 2 vectors
-  inline static Vec2 Round(const Vec2 &vector) { return Vec2(round(vector[0]), round(vector[1])); }
+  inline static float Dot(const Vec2 &a, const Vec2 &b) { return a.x * b.x + a.y * b.y; }
+  inline static Vec2 Min(const Vec2 &a, const Vec2 &b) { return Vec2(std::min(a.x, b.x), std::min(a.y, b.y)); } //smallest from 2 vectors
+  inline static Vec2 Max(const Vec2 &a, const Vec2 &b) { return Vec2(std::max(a.x, b.x), std::max(a.y, b.y)); } //biggest from 2 vectors
+  inline static Vec2 Round(const Vec2 &vector) { return Vec2(round(vector.x), round(vector.y)); }
+  inline static Vec2 Abs(const Vec2 &vector) { return Vec2(abs(vector.x), abs(vector.y)); }
   static Vec2 ClampMagnitude(const Vec2 &vector, float maxMagnitude, float minMagnitude);
 
   static const Vec2 right;

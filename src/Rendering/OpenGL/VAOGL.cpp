@@ -22,7 +22,7 @@ std::size_t BufferLayoutElementGL::GetSizeOfTypeGL(uint32_t type)
   return 4; //hoping that we will hit
 }
 
-void BufferLayoutGL::AddBufferLayoutElement(uint32_t type, char size, char normalized)
+void BufferLayoutGL::AddBufferLayoutElement(uint32_t type, char size, unsigned char normalized)
 {
   m_layoutElements.push_back(BufferLayoutElementGL(type, size, normalized, m_stride));
   m_stride += BufferLayoutElementGL::GetSizeOfTypeGL(type) * size;

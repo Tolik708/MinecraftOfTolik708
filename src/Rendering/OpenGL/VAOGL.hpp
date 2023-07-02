@@ -18,7 +18,7 @@ struct BufferLayoutElementGL
 
   uint32_t type = GL_FLOAT;
   char size = 3;
-  char normalized = 0;
+  unsigned char normalized = 0;
   char offset = 0; // hope that one vertex won't be larger then 255 bytes
 };
 
@@ -28,11 +28,11 @@ class BufferLayoutGL
 public:
   BufferLayoutGL() = default;
   template<typename... Args, typename std::enable_if<(sizeof...(Args) % 3) == 0, bool>::type = true>
-  BufferLayoutGL(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
+  BufferLayoutGL(uint32_t type, char size, unsigned char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
 
-  template<typename... Args> void Iterate(uint32_t type, char size, char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
+  template<typename... Args> void Iterate(uint32_t type, char size, unsigned char normalized, Args... args) { AddBufferLayoutElement(type, size, normalized); Iterate(args...); }
   inline void Iterate() {}
-  void AddBufferLayoutElement(uint32_t type, char size, char normalized);
+  void AddBufferLayoutElement(uint32_t type, char size, unsigned char normalized);
   inline std::size_t GetStride() const { return m_stride; }
   inline const std::vector<BufferLayoutElementGL> &GetLayoutElements() const { return m_layoutElements; }
 

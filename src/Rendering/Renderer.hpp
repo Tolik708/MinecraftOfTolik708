@@ -8,7 +8,7 @@
 namespace Tolik
 {
 class Window;
-class Database;
+class Camera;
 
 struct Vertex
 {
@@ -33,17 +33,18 @@ class Renderer
 public:
   virtual ~Renderer() = default;
 
-  virtual void StartFrame() = 0;
+  virtual void StartFrame(const Camera &camera) = 0;
   virtual void Render(void *mesh) = 0;
   virtual void *CreateMesh(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, MeshType type) = 0;
+  virtual void Debug(void *data) = 0;
   virtual void EndFrame() = 0;
 
   virtual void SetWindow(Window *window) = 0;
-  virtual uint32_t GetSDLWindowFlags() = 0;
+  virtual uint32_t GetSDLWindowFlags() const = 0;
   virtual void UpdateDrawbleSize() = 0;
 
-  inline int GetWidth() { return m_width; }
-  inline int GetHeight() { return m_height; }
+  inline int GetWidth() const { return m_width; }
+  inline int GetHeight() const { return m_height; }
 
 protected:
   int m_width, m_height;

@@ -4,6 +4,8 @@
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <glm.hpp>
+#include <gtc/type_ptr.hpp>
+
 
 #include <cstddef>
 #include <math.h>

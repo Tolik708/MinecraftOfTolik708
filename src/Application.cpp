@@ -21,10 +21,8 @@ void Application::Run()
   m_running = true;
   while(m_running)
   {
-    m_window.GetRenderer()->StartFrame();
     m_window.ListenToEvents();
     m_game.Update();
-    m_window.GetRenderer()->EndFrame();
   }
 }
 }

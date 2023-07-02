@@ -3,6 +3,7 @@
 #include "Header.hpp"
 
 #include "Window.hpp"
+#include "Camera.hpp"
 #include "Debug.hpp"
 #include "ShaderGL.hpp"
 #include "MeshGL.hpp"
@@ -35,9 +36,13 @@ void RendererGL::SetWindow(Window *window)
   GL_CALL(glViewport(0, 0, m_width, m_height));
 }
 
-void RendererGL::StartFrame()
+void RendererGL::StartFrame(const Camera &camera)
 {
   GL_CALL(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
+
+  // I decided that fully hardcoded values will be fine
+  // Meight be I'll add common uniform setter in the future
+  resources->GetShader(MeshType::Chunk).SetUniform<4>("u_view", 1, GL_FALSE, &camera.GetViewMatrix()[0][0]);
 }
 
 void RendererGL::Render(void *mesh)
@@ -52,12 +57,17 @@ void *RendererGL::CreateMesh(const std::vector<Vertex> &verts, const std::vector
   return new MeshGL(verts, inds, resources->GetLayout(meshType), meshType);
 }
 
+void RendererGL::Debug(void *data)
+{
+  
+}
+
 void RendererGL::EndFrame()
 {
   SDL_GL_SwapWindow(m_window->GetWindow());
 }
 
-uint32_t RendererGL::GetSDLWindowFlags()
+uint32_t RendererGL::GetSDLWindowFlags() const
 {
   return SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
 }

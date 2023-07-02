@@ -8,7 +8,7 @@
 
 namespace Tolik
 {
-class Debug;
+class Camera;
 class Window;
 
 class RendererGL : public Renderer
@@ -18,12 +18,13 @@ public:
   ~RendererGL();
   virtual void SetWindow(Window *window) override;
 
-  virtual void StartFrame() override;
+  virtual void StartFrame(const Camera &camera) override;
   virtual void Render(void *mesh) override;
   virtual void *CreateMesh(const std::vector<Vertex> &verts, const std::vector<uint32_t> &inds, MeshType type) override;
+  virtual void Debug(void *data) override;
   virtual void EndFrame() override;
 
-  virtual uint32_t GetSDLWindowFlags() override;
+  virtual uint32_t GetSDLWindowFlags() const override;
   virtual void UpdateDrawbleSize() override;
   
 private:

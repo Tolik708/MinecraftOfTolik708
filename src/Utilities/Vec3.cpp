@@ -43,12 +43,14 @@ Vec3 Vec3::ClampMagnitude(const Vec3 &vector, float maxMagnitude, float minMagni
   return vector;
 }
 
-const Vec3 Vec3::right = Vec3(1, 0, 0);
-const Vec3 Vec3::left = Vec3(-1, 0, 0);
-const Vec3 Vec3::up = Vec3(0, 1, 0);
-const Vec3 Vec3::down = Vec3(0, -1, 0);
-const Vec3 Vec3::forward = Vec3(0, 0, 1);
+const Vec3 Vec3::right    = Vec3(1, 0, 0);
+const Vec3 Vec3::up       = Vec3(-1, 0, 0);
+const Vec3 Vec3::left     = Vec3(0, 1, 0);
+const Vec3 Vec3::down     = Vec3(0, -1, 0);
+const Vec3 Vec3::forward  = Vec3(0, 0, 1);
 const Vec3 Vec3::backward = Vec3(0, 0, -1);
-const Vec3 Vec3::one = Vec3(1, 1, 1);
-const Vec3 Vec3::zero = Vec3();
+const Vec3 Vec3::one      = Vec3(1, 1, 1);
+const Vec3 Vec3::zero     = Vec3();
+const Vec3 Vec3::min      = Vec3(std::numeric_limits<float>::min(), std::numeric_limits<float>::min(), std::numeric_limits<float>::min());
+const Vec3 Vec3::max      = Vec3(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
 }

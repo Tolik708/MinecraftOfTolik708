@@ -55,4 +55,17 @@ ShaderGL::ShaderGL(const std::string &vertexShaderPath, const std::string &fragm
   GL_CALL(glDeleteShader(vertexShader));
   GL_CALL(glDeleteShader(fragmentShader));
 }
+
+int ShaderGL::GetLocation(const std::string &name) const
+{
+  int result = -1;
+  GL_CALL(result = glGetUniformLocation(m_id, name.c_str()));
+  if(result == -1)
+  {
+    Debug::GetLogger("main").Error("In call to glGetUniformLocation: name does not correspond to an active uniform variable in \
+    program, name starts with the reserved prefix \"gl_\", or name is associated with an atomic counter or a named uniform block.");
+    return 0;
+  }
+  return result;
+}
 }

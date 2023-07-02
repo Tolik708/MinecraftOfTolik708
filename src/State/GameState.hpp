@@ -8,6 +8,7 @@ union SDL_Event;
 namespace Tolik
 {
 class Debug;
+class Player;
 
 class GameState : public State
 {
@@ -20,6 +21,7 @@ public:
 private:
   StateDeps *deps;
   void *m_mesh;
+  Player *player;
 
   static int EventFilter(void *userdata, SDL_Event *event);
 };

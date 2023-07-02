@@ -12,6 +12,7 @@ THIRDPARTY := glad/src/glad.o
 ARGS :=
 ECHO := @
 PROGRESS := 1
+DEFINES := BUILD=0
 
 
 #find all folders in $(SOURCEDIR)
@@ -30,6 +31,8 @@ OBJS := $(foreach file,$(SOURCES),$(file:$(SOURCEDIR)/%.cpp=$(BUILDDIR)/%.o))
 LIBS := $(subst -I,-I$(LIBDIR)/,$(LIBS))
 LIBS := $(subst -L,-L$(LIBDIR)/,$(LIBS))
 THIRDPARTY := $(foreach path,$(THIRDPARTY),$(addprefix $(LIBDIR)/,$(path)))
+#preprocess $(DEFINES)
+DEFIENS := $(foreach def,$(DEFINES),$(addprefix -D,$(def)))
 
 run: compile
 	$(ECHO)if [ $(PROGRESS) ]; then \
@@ -41,7 +44,7 @@ precompileHeader: $(ARGS)
 	$(ECHO)if [ $(PROGRESS) ]; then \
 		echo Compiling $(notdir $(ARGS))...; \
 	fi; \
-	g++ $(DEBUG) $(ARGS) -c $(addsufix .gch,$(ARGS)) $(INCLUDES) $(FLAGS) $(LIBS); \
+	g++ $(DEBUG) $(ARGS) -c $(addsufix .gch,$(ARGS)) $(INCLUDES) $(FLAGS) $(LIBS) $(DEFIENS); \
 	if [ $(PROGRESS) ]; then \
 		echo Compiled!; \
 	fi;
@@ -50,7 +53,7 @@ debug: compile
 	gdb --args $(BUILDDIR)/$(APPNAME) $(ARGS)
 
 compile: $(OBJS)
-	$(ECHO)g++ $(DEBUG) $(OBJS) $(THIRDPARTY) -o $(BUILDDIR)/$(APPNAME) $(INCLUDES) $(FLAGS) $(LIBS); \
+	$(ECHO)g++ $(DEBUG) $(OBJS) $(THIRDPARTY) -o $(BUILDDIR)/$(APPNAME) $(INCLUDES) $(FLAGS) $(LIBS) $(DEFIENS); \
 	if [ $(PROGRESS) ]; then \
     echo Compiled!; \
   fi
@@ -60,7 +63,7 @@ $(1:$(SOURCEDIR)/%.cpp=$(BUILDDIR)/%.o): $1 $(INCLUDEFILES)
 	$(ECHO)if [ $(PROGRESS) ]; then \
     echo Compiling $(notdir $(1))...; \
   fi; \
-	g++ $(DEBUG) -c $$< -o $$@ $(INCLUDES) $(FLAGS) $(LIBS)
+	g++ $(DEBUG) -c $$< -o $$@ $(INCLUDES) $(FLAGS) $(LIBS) $(DEFIENS)
 
 endef
 
